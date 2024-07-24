@@ -1,0 +1,11 @@
+body {
+    background-color: #000;
+    background-image: url('../imgs/naruto-uzumaki-3840x2160-13143.jpg');
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+header {
+    background-color: orange;
+}
