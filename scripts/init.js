@@ -65,12 +65,18 @@ let $timer = $('#timer');
 let timer = new Timer($timer);
 let initTimer = false;
 
+// Contador de tentativas
+let countTentativas = 0;
+let $tentativas = $('#tentativas');
+$tentativas.text('').text(countTentativas);
+
 const STATUS = {
   BACK: "BACK",
   FRONT: "FRONT",
   FOUND: "FOUND",
 };
 
+// Tabuleiro
 let $board = $("#board");
 
 // Imagens
@@ -88,6 +94,7 @@ let cardPairs = frontCards.concat(frontCards); // Duplicar as imagens para criar
 // Embaralha as cartas
 cardPairs.sort(() => 0.5 - Math.random());
 
+// Cria e renderiza as cartas no tabuleiro
 for (let i = 0; i < cardPairs.length; i++) {
   let $card = $("<div>", { id: i, class: "card" });
 
@@ -120,6 +127,12 @@ let varCards = {
   card2: -1,
 };
 
+function addTentativas(){
+  countTentativas += 1;
+  $tentativas.text('').text(countTentativas);
+}
+
+// Atualiza as cartas guardadas
 function updateVarCards(cardObject) {
   if (!initTimer) {
       timer.start();
@@ -160,6 +173,7 @@ function unblockCards() {
 
 function verifyCards() {
   if (varCards.card1 !== -1 && varCards.card2 !== -1) {
+    addTentativas();
       if (
           cardsObject[varCards.card1].frontImg ===
               cardsObject[varCards.card2].frontImg &&
