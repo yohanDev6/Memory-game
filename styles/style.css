@@ -5,6 +5,11 @@ body {
     background-attachment: fixed;
 }
 
+main {
+    display: flex;
+    justify-content: center;
+}
+
 header > div, footer > div {
     background-color: rgb(221, 144, 0);
 }
@@ -14,12 +19,17 @@ header > div, footer > div {
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 1em;
     justify-content: center;
+    margin: 0 auto;
 }
 
 .card {
     width: 150px;
     height: 180px;
     perspective: 1000px;
+    border-radius: 12px;
+    box-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    margin: 0 auto;
 }
 
 .innerCard {
@@ -44,11 +54,13 @@ header > div, footer > div {
 .backCard {
     background: url('../imgs/back-card.jpg') no-repeat center center;
     background-size: cover;
+    border-radius: 12px;
 }
 
 .frontCard {
     background-size: cover;
     transform: rotateY(180deg);
+    border-radius: 12px;
 }
 
 @media (max-width: 890px) {
