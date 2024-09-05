@@ -81,11 +81,11 @@ class Card {
   
   // Imagens
   let frontCards = [
-    "../imgs/dojutsus/byakugan.jpg",
-    "../imgs/dojutsus/jogan.jpg",
-    "../imgs/dojutsus/rinnegan.jpg",
-    "../imgs/dojutsus/sannin-mode.jpg",
-    "../imgs/dojutsus/sharingan.jpg",
+    "/imgs/dojutsus/byakugan.jpg",
+    "/imgs/dojutsus/jogan.jpg",
+    "/imgs/dojutsus/rinnegan.jpg",
+    "/imgs/dojutsus/sannin-mode.jpg",
+    "/imgs/dojutsus/sharingan.jpg",
   ];
   
   let cardsObject = [];
