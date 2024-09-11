@@ -10,7 +10,7 @@
     <script src="{% static '/js/jquery-3.7.1.js' %}"></script>
     <script defer src="{% static '/js/init.js' %}"></script>
 </head>
-<body>
+<body class="flex">
     <header>
         <h1>
             Jogo da Memória de Naruto
@@ -24,7 +24,7 @@
         <div id="board"></div>
         
         <!-- Formulário que será exibido ao fim do jogo -->
-        <div id="end-game-form" style="display: none;">
+        <div id="end-game-form" class="flex" style="display: none;">
             <h2>Parabéns! Você completou o jogo.</h2>
             <form id="save-game-form">
                 <label for="player-name">Nome:</label>
@@ -37,19 +37,17 @@
         </div>
     </main>
     <footer class="flex">
-        <div class="row">
-            <div class="col">
-                <p>Kauany Maria Cavalcante da Silva</p>
-                <p>Pedro Yohan Mendonça da Silva</p>
-            </div>
-            <div class="col">
-                <p>Todos os direitos reservados &copy;</p>
-                <p>IFRN - <em>Campus</em> Santa Cruz/RN</p>
-            </div>
-            <div class="col">
-                <p>Disciplina: Programação para Internet</p>
-                <p>Professor: Marcelo Figueiredo Barbosa Júnior</p>
-            </div>
+        <div class="col">
+            <p>Kauany Maria Cavalcante da Silva</p>
+            <p>Pedro Yohan Mendonça da Silva</p>
+        </div>
+        <div class="col">
+            <p>Todos os direitos reservados &copy;</p>
+            <p>IFRN - <em>Campus</em> Santa Cruz/RN</p>
+        </div>
+        <div class="col">
+            <p>Disciplina: Programação para Internet</p>
+            <p>Professor: Marcelo Figueiredo Barbosa Júnior</p>
         </div>
     </footer>
 </body>

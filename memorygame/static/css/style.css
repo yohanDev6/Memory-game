@@ -3,9 +3,9 @@ body {
     background-image: url('../imgs/naruto-uzumaki-3840x2160-13143.jpg');
     background-size: cover;
     background-attachment: fixed;
-    display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 0 4em;
 }
 
 .flex {
@@ -17,12 +17,10 @@ main {
     justify-content: center;
 }
 
-header {
+header, footer, #end-game-form {
     background-color: rgb(221, 144, 0);
-    width: 80%;
     border-radius: 12px;
     box-shadow: 1px 1px 1px black;
-    margin-top: 10px;
 }
 
 .score {
@@ -99,8 +97,11 @@ header {
 footer {
     flex-direction: row;
     justify-content: space-between;
-    width: 80%;
-    margin-bottom: 10px;
+    margin: 20px 0;
+}
+
+footer > div {
+    width: 33.3%;
 }
 
 footer p, header h1 {
@@ -108,8 +109,22 @@ footer p, header h1 {
     text-align: center;
 }
 
+#end-game-form {
+    color: white;
+    width: 400px;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
 @media (max-width: 890px) {
     #board {
         grid-template-columns: repeat(3, 1fr);
+    }
+
+    footer {
+        flex-direction: column;
     }
 }
