@@ -5,3 +5,6 @@ class Partida(models.Model):
     attempts = models.IntegerField(null=False)
     datetime = models.DateTimeField(null=False)
     time = models.TimeField(null=False)
+    
+    def __str__(self):
+        return self.name

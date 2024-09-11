@@ -1,11 +1,58 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{% static '/css/lbstyle.css' %}">
     <title>Ranking</title>
 </head>
 <body>
-    
+    <header>
+        <h1>Ranking de Partidas</h1>
+    </header>
+    <main>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tentativas</th>
+                    <th>Data e Hora</th>
+                    <th>Tempo</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for partida in partidas %}
+                    <tr>
+                        <td>{{ partida.name }}</td>
+                        <td>{{ partida.attempts }}</td>
+                        <td>{{ partida.datetime|date:"d/m/Y H:i" }}</td>
+                        <td>{{ partida.time|date:"H:i:s" }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4">Nenhuma partida encontrada</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </main>
+    <footer>
+        <div class="row">
+            <div class="col">
+                <p>Kauany Maria Cavalcante da Silva</p>
+                <p>Pedro Yohan Mendonça da Silva</p>
+            </div>
+            <div class="col">
+                <p>Todos os direitos reservados &copy;</p>
+                <p>IFRN - <em>Campus</em> Santa Cruz/RN</p>
+            </div>
+            <div class="col">
+                <p>Disciplina: Programação para Internet</p>
+                <p>Professor: Marcelo Figueiredo Barbosa Júnior</p>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

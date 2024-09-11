@@ -5,44 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jogo da Memória</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="{% static '/js/jquery-3.7.1.min.js' %}" defer></script>
-    <script src="{% static '/js/init.js' %}"></script>
+    <script src="{% static '/js/jquery-3.7.1.js' %}"></script>
+    <script defer src="{% static '/js/init.js' %}"></script>
 </head>
 <body>
-    <header class="container-fluid m-2 justify-content-center">
-        <div class="container-xl p-2 rounded shadow">
-            <h1 class="text-white text-center">
-                Jogo da Memória de Naruto
-            </h1>
-        </div>
+    <header>
+        <h1>
+            Jogo da Memória de Naruto
+        </h1>
     </header>
-    <main class="container-fluid mt-3 mb-3">
-        <div class="score m-3">
+    <main class="flex">
+        <div class="score">
             <p>Tempo: <span id="timer">00:00:00</span></p>
             <p>Tentativas: <span id="tentativas">0</span></p>
         </div>
-        <div class="container-lg" id="board"></div>
-        <!-- As cartas são geradas no javascript -->
+        <div id="board"></div>
+        
+        <!-- Formulário que será exibido ao fim do jogo -->
+        <div id="end-game-form" style="display: none;">
+            <h2>Parabéns! Você completou o jogo.</h2>
+            <form id="save-game-form">
+                <label for="player-name">Nome:</label>
+                <input type="text" id="player-name" name="player_name" required>
+                <input type="hidden" id="game-time" name="game_time">
+                <input type="hidden" id="game-attempts" name="game_attempts">
+                <button type="submit">Salvar Partida</button>
+            </form>
+            <p id="message"></p>
+        </div>
     </main>
-    <footer class="container-fluid m-2 justify-content-center">
-        <div class="container-xl p-2 rounded shadow">
-            <div class="row">
-                <div class="col">
-                    <p class="text-center text-white">Kauany Maria Cavalcante da Silva</p>
-                    <p class="text-center text-white">Pedro Yohan Mendonça da Silva</p>
-                </div>
-                <div class="col">
-                    <p class="text-center text-white">Todos os direitos reservados &copy;</p>
-                    <p class="text-center text-white">IFRN - <em>Campus</em> Santa Cruz/RN</p>
-                </div>
-                <div class="col">
-                    <p class="text-center text-white">Disciplina: Programação para Internet</p>
-                    <p class="text-center text-white">Professor: Marcelo Figueiredo Barbosa Júnior</p>
-                </div>
+    <footer class="flex">
+        <div class="row">
+            <div class="col">
+                <p>Kauany Maria Cavalcante da Silva</p>
+                <p>Pedro Yohan Mendonça da Silva</p>
+            </div>
+            <div class="col">
+                <p>Todos os direitos reservados &copy;</p>
+                <p>IFRN - <em>Campus</em> Santa Cruz/RN</p>
+            </div>
+            <div class="col">
+                <p>Disciplina: Programação para Internet</p>
+                <p>Professor: Marcelo Figueiredo Barbosa Júnior</p>
             </div>
         </div>
     </footer>
