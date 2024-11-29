@@ -11,12 +11,25 @@ def index(request):
     return render(request,'index.html')
 
 def partidas(request):
-    partidas = Partida.objects.all().order_by('time')
+    # Obtém o parâmetro 'order' da query string (com padrão 'time')
+    order = request.GET.get('order', 'time')
+    
+    # Ordena com base no parâmetro
+    if order == 'attempts':
+        partidas = Partida.objects.all().order_by('attempts')  # Ordenar por menos tentativas
+    elif order == 'time':
+        partidas = Partida.objects.all().order_by('time')  # Ordenar por menos tempo
+    else:
+        partidas = Partida.objects.all().order_by('time')  # Valor padrão
+    
+    # Formata o campo 'time' com milissegundos
     for partida in partidas:
-        # Formatando o campo time com milissegundos
-        partida.formatted_time = partida.time.strftime('%H:%M:%S.%f')[:-3]  # Remover os últimos 3 dígitos dos microssegundos
+        partida.formatted_time = partida.time.strftime('%H:%M:%S.%f')[:-3]  # Remover os últimos 3 dígitos
+    
+    # Passa o parâmetro atual para o contexto
     context = {
-        'partidas': partidas
+        'partidas': partidas,
+        'current_order': order
     }
     return render(request, 'laderboards.html', context)
 
