@@ -1,15 +1,19 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-import json
+from django.contrib.auth.decorators import login_required
 from .models import Partida
 from django.utils import timezone
 from datetime import datetime
+from django.contrib.auth.models import User
+from django.contrib import messages
 
 # Create your views here.
+@login_required
 def index(request):
     return render(request,'index.html')
 
+@login_required
 def partidas(request):
     # Obtém o parâmetro 'order' da query string (com padrão 'time')
     order = request.GET.get('order', 'time')
@@ -34,6 +38,7 @@ def partidas(request):
     return render(request, 'laderboards.html', context)
 
 @csrf_exempt
+@login_required
 def savePartida(request):
     if request.method == 'POST':
         nome = request.POST.get('player_name')
@@ -58,3 +63,30 @@ def savePartida(request):
         return JsonResponse({'status': 'success'}, status=200)
 
     return JsonResponse({'status': 'invalid request'}, status=400)
+
+def register(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        email = request.POST['email']
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+
+        if password != confirm_password:
+            messages.error(request, "As senhas não coincidem.")
+            return render(request, 'register.html')
+
+        if User.objects.filter(username=username).exists():
+            messages.error(request, "Nome de usuário já está em uso.")
+            return render(request, 'register.html')
+
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "E-mail já está em uso.")
+            return render(request, 'register.html')
+
+        # Cria o usuário
+        user = User.objects.create_user(username=username, email=email, password=password)
+        user.save()
+        messages.success(request, "Registro concluído com sucesso!")
+        return redirect('login')
+
+    return render(request, 'register.html')
