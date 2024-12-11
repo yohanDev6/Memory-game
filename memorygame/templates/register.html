@@ -9,12 +9,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome (para os ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/registerLogin.css' %}">
     <script src="{% static 'js/validate.js' %}" defer></script>
     <title>Registro</title>
 </head>
 <body>
+    <nav class="nav-bar">
+        <div class="navigation">
+            <button class="nav-btn">
+                <i class="fas fa-trophy"></i>
+                <a href="http://localhost:8000/laderboards">Confira o Ranking!</a>
+            </button>
+        </div>
+    </nav>
     <main class="register-container">
         <h1>Registrar-se</h1>
         <form id="registerForm" method="POST" action="{% url 'register' %}">
@@ -29,7 +40,7 @@
         {% if messages %}
             <div class="messages">
                 {% for message in messages %}
-            <div class="{{ message.tags }}">{{ message }}</div>
+                    <div class="{{ message.tags }}">{{ message }}</div>
                 {% endfor %}
             </div>
         {% endif %}

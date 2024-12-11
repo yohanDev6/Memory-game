@@ -195,64 +195,36 @@ function verifyCards() {
 
     if (anyBodyWon()) {
         timer.stop();
-        showEndGameForm(); // Exibe o formulário ao final do jogo
+        sendGameData(); // Envia os dados diretamente para o backend
     }
 }
 
-function showEndGameForm() {
-  let totalMilliseconds = timer.elapsedTime;  // Pega o tempo total em milissegundos
-  let milliseconds = Math.floor((totalMilliseconds % 1000) / 10);  // Obtém os milissegundos
-  let seconds = Math.floor((totalMilliseconds / 1000) % 60);  // Obtém os segundos
-  let minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60);  // Obtém os minutos
-  let hours = Math.floor(totalMilliseconds / (1000 * 60 * 60));  // Obtém as horas
+function sendGameData() {
+    let totalMilliseconds = timer.elapsedTime;
+    let milliseconds = Math.floor((totalMilliseconds % 1000) / 10);
+    let seconds = Math.floor((totalMilliseconds / 1000) % 60);
+    let minutes = Math.floor((totalMilliseconds / (1000 * 60)) % 60);
+    let hours = Math.floor(totalMilliseconds / (1000 * 60 * 60));
 
-  // Formatar tempo em HH:MM:SS.MS
-  let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
+    let formattedTime = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}.${milliseconds.toString().padStart(2, '0')}`;
 
-  // Preencher os campos ocultos com o tempo e tentativas
-  $("#game-time").val(formattedTime);  // Envia o tempo formatado para o backend
-  $("#game-attempts").val(countTentativas);
-
-  // Exibe o formulário
-  $("#end-game-form").show();
-}
-
-// Enviar o formulário via AJAX
-$("#save-game-form").on("submit", function (event) {
-    event.preventDefault();
-
-    let playerName = $("#player-name").val();
-    let gameTime = $("#game-time").val();
-    let gameAttempts = $("#game-attempts").val();
-
-    // Verificar se o nome foi preenchido
-    if (!playerName) {
-        alert("Por favor, insira seu nome.");
-        return;
-    }
-
-    // Enviar os dados via AJAX para o backend
+    // Enviar os dados via AJAX
     $.ajax({
-        url: "/savepartida/", // URL do backend que vai processar o salvamento
+        url: "/savepartida/", // URL do backend que processa o salvamento
         type: "POST",
         data: {
-            player_name: playerName,
-            game_time: gameTime,
-            game_attempts: gameAttempts,
+            game_time: formattedTime,
+            game_attempts: countTentativas,
             csrfmiddlewaretoken: "{{ csrf_token }}", // Django CSRF Token
         },
         success: function (response) {
-            // Exibir uma mensagem de sucesso
-            $("#message").text("Partida salva com sucesso!");
-            // Ocultar o formulário após o sucesso
-            $("#end-game-form").hide();
+            alert("Partida salva com sucesso!");
         },
         error: function () {
-            // Exibir uma mensagem de erro
-            $("#message").text("Ocorreu um erro ao salvar a partida.");
+            alert("Ocorreu um erro ao salvar a partida.");
         },
     });
-});
+}
 
 function anyBodyWon() {
     return cardsObject.every((card) => card.status === STATUS.FOUND);

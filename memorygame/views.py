@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from .models import Partida
 from django.utils import timezone
 from datetime import datetime
@@ -51,6 +52,9 @@ def savePartida(request):
         except ValueError:
             return JsonResponse({'status': 'error', 'message': 'Invalid time format'}, status=400)
 
+        # Usa o nome do usuário logado
+        nome = request.user.username
+
         # Criar o objeto Partida e salvar no banco de dados
         partida = Partida(
             name=nome,
@@ -63,6 +67,7 @@ def savePartida(request):
         return JsonResponse({'status': 'success'}, status=200)
 
     return JsonResponse({'status': 'invalid request'}, status=400)
+
 
 def register(request):
     if request.method == 'POST':
@@ -88,5 +93,14 @@ def register(request):
         user.save()
         messages.success(request, "Registro concluído com sucesso!")
         return redirect('login')
+
+        # Autentica e faz login do usuário automaticamente
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)  # Faz login do usuário
+            return redirect('index')  # Redireciona para o jogo após login
+
+        messages.success(request, "Registro concluído com sucesso! Por favor, faça login.")
+        return redirect('login')  # Caso algo falhe, redirecione para o login
 
     return render(request, 'register.html')

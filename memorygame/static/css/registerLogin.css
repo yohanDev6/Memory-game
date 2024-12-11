@@ -1,3 +1,53 @@
+/* Estilo da barra de navegação */
+.nav-bar {
+    width: 100%;
+    padding: 10px 20px;
+    position: fixed; /* Fixa a barra de navegação no topo */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Garante que ela fique acima de outros elementos */
+    display: flex;
+    justify-content: center; /* Centraliza os itens */
+}
+
+/* Botão do ranking */
+.nav-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(241, 157, 0);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.nav-btn:hover {
+    background-color: rgb(163, 106, 0);
+    color: #fff;
+}
+
+/* Ícone do botão */
+.nav-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+/* Ajusta o espaçamento do conteúdo para não ficar escondido atrás da nav-bar */
+main.login-container,
+main.register-container {
+    margin-top: 80px; /* Adiciona margem para compensar a altura da nav-bar */
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     display: flex;
@@ -19,6 +69,7 @@ form {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
+    margin-top: 20px;
 }
 
 .login-container h1 {

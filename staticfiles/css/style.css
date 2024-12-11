@@ -128,3 +128,7 @@ footer p, header h1 {
         flex-direction: column;
     }
 }
+
+.nav-bar {
+    margin: 10px;
+}

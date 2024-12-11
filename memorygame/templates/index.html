@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     
+    <!-- Font Awesome (para os ícones) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <link rel="stylesheet" type="text/css" href="{% static '/css/style.css' %}">
     
     <script src="{% static '/js/jquery-3.7.1.js' %}"></script>
@@ -21,8 +24,23 @@
             Jogo da Memória de Naruto
         </h1>
     </header>
-    <nav>
-        <a href="http://localhost:8000/laderboards">Ranking<a/>
+    <nav class="nav-bar">
+        <div class="navigation">
+            <button class="nav-btn">
+                <i class="fas fa-user-cog"></i>
+                <a href="http://localhost:8000/admin">Administrador</a>
+            </button>
+            <button class="nav-btn">
+                <i class="fas fa-trophy"></i>
+                <a href="http://localhost:8000/laderboards">Ranking</a>
+            </button>
+            <form id="logout-form" action="{% url 'logout' %}" method="POST">
+                {% csrf_token %}
+                <button type="submit" class="nav-btn">
+                    <i class="fas fa-sign-out-alt"></i> Sair
+                </button>
+            </form>            
+        </div>
     </nav>
     <main class="flex">
         <div class="score">
@@ -30,20 +48,7 @@
             <p>Tentativas: <span id="tentativas">0</span></p>
         </div>
         <div id="board"></div>
-        
-        <!-- Formulário que será exibido ao fim do jogo -->
-        <div id="end-game-form" class="flex" style="display: none;">
-            <h2>Parabéns! Você completou o jogo.</h2>
-            <form id="save-game-form">
-                <label for="player-name">Nome:</label>
-                <input type="text" id="player-name" name="player_name" required>
-                <input type="hidden" id="game-time" name="game_time">
-                <input type="hidden" id="game-attempts" name="game_attempts">
-                <button type="submit">Salvar Partida</button>
-            </form>
-            <p id="message"></p>
-        </div>
-    </main>
+    </main>   
     <footer class="flex">
         <div class="col">
             <p>Kauany Maria Cavalcante da Silva</p>
