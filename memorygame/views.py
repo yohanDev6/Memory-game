@@ -14,7 +14,6 @@ from django.contrib import messages
 def index(request):
     return render(request,'index.html')
 
-@login_required
 def partidas(request):
     # Obtém o parâmetro 'order' da query string (com padrão 'time')
     order = request.GET.get('order', 'time')
@@ -88,19 +87,16 @@ def register(request):
             messages.error(request, "E-mail já está em uso.")
             return render(request, 'register.html')
 
-        # Cria o usuário
         user = User.objects.create_user(username=username, email=email, password=password)
         user.save()
-        messages.success(request, "Registro concluído com sucesso!")
-        return redirect('login')
 
-        # Autentica e faz login do usuário automaticamente
         user = authenticate(request, username=username, password=password)
         if user is not None:
-            login(request, user)  # Faz login do usuário
-            return redirect('index')  # Redireciona para o jogo após login
+            login(request, user)
+            messages.success(request, "Registro concluído com sucesso! Bem-vindo(a) ao jogo.")
+            return redirect('index')
 
-        messages.success(request, "Registro concluído com sucesso! Por favor, faça login.")
-        return redirect('login')  # Caso algo falhe, redirecione para o login
+        messages.error(request, "Erro ao tentar realizar o login após o registro.")
+        return redirect('login')
 
     return render(request, 'register.html')
