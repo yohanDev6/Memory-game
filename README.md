@@ -11,6 +11,7 @@ Um jogo simples e divertido de 10 cartas, contendo 5 pares de olhos que represen
   - VSCode (opcional, mas de preferência)
   - Navegador Google Chrome (ou outro compatível)
 
+---
 ## 🚀 Como executar o projeto
 
 1. **Clone o repositório**:  
@@ -30,12 +31,18 @@ Um jogo simples e divertido de 10 cartas, contendo 5 pares de olhos que represen
 
 4. **Configure o interpretador no editor de código se necessário**
 
-5. **Execute o servidor local**
+5. **Não se esqueça de executar as migrações e refleti-las no banco de dados!**
+    ```bash
+    python manage.py migrate
+    python manage.py makemigrations
+     
+6. **Execute o servidor local**
     ```bash
     python manage.py runserver
 
 Agora acesse o jogo no seu navegador em localhost:8000
 
+---
 ## 🎮 Funcionalidades
 **Jogo de Memória:**
   Combine as 5 duplas de dojutsus no menor tempo possível.
@@ -47,6 +54,7 @@ Para acessar, crie um superusuário com o comando:
     ```bash
     python manage.py createsuperuser
 
+---
 ## ⚠️ Aviso Importante
   - Este projeto é apenas para **fins de demonstração**.
   - ⚠️ **Não use dados reais** ao utilizar o sistema.
