@@ -1,5 +1,6 @@
 # 🌀 Jogo da Memória do Naruto
 
+`Concluído v1.0`
 Um jogo simples e divertido de 10 cartas, contendo 5 pares de olhos que representam alguns dos dojutsus do anime Naruto!  
 **Desenvolvido com Django e Python**, este projeto é apenas para fins educativos e profissionais.  
 ⚠️ **Não use dados reais, pois o propósito é demonstrativo!**
